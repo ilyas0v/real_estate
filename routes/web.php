@@ -22,10 +22,13 @@ Route::get('login' , function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+    return view('home');
+})->middleware('auth');
 
 Route::group(['prefix' => 'admin' , 'middleware'=>'auth'], function(){
     Route::get('/' , function(){
         return view('admin.main');
-    });
+    })->name('admin.main');
+    Route::resource('homes' , 'HomeController');
 });

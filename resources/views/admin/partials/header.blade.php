@@ -79,13 +79,16 @@
                 </li>
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
                         <i class="ion ion-android-person d-lg-none"></i>
-                        <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+                        <div class="d-sm-none d-lg-inline-block">Hi, {{Auth::user()->name}}</div></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="profile.html" class="dropdown-item has-icon">
                             <i class="ion ion-android-person"></i> Profile
                         </a>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="#" onclick="$('#logoutform').submit()" class="dropdown-item has-icon">
                             <i class="ion ion-log-out"></i> Logout
+                            <form action="{{route('logout')}}" id="logoutform" method="POST">
+                                @csrf
+                            </form>
                         </a>
                     </div>
                 </li>
