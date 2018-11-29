@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('dist/modules/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('dist/css/demo.css')}}">
     <link rel="stylesheet" href="{{asset('dist/css/style.css')}}">
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'#description' });</script>
 </head>
 
 <body>
