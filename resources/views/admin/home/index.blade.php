@@ -28,6 +28,14 @@
                             <td>{{$home->floor}}</td>
                             <td>{{$home->registered}}</td>
                             <td>{{$home->region->name}}</td>
+                            <td>
+                                <a href="{{route('homes.edit',$home->id)}}" class="btn btn-warning">Edit</a>
+                                <a href="#" onclick="if(confirm('Are you sure to delete {{$home->title}}')){ $('#deleteform').submit();}" class="btn btn-danger">Delete</a>
+                                <form id="deleteform" style="display: inline" action="{{route('homes.destroy',$home->id)}}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    @csrf
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </table>

@@ -91,7 +91,11 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $home = Home::find($id);
+        //var_dump($home->floor);
+        //exit;
+        $regions = Region::all();
+        return view('admin.home.edit')->withHome($home)->withRegions($regions);
     }
 
     /**
@@ -103,7 +107,39 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $home = Home::find($id);
+
+        $this->validate($request , [
+            'title' => 'required|string|min:5|max:100',
+            'description' => 'required|string|min:5',
+            'area' => 'integer|required',
+            'price' => 'integer|required',
+            'rooms' => 'integer|required',
+            'floor' => 'integer|required',
+            'has_garden' => 'integer|required',
+            'registered' => 'integer|required',
+            'is_flat' => 'integer|required',
+            'is_rental' => 'integer|required',
+            'is_fixed' => 'integer|required',
+            'region_id' => 'integer|required',
+        ]);
+
+        $home->title = $request->input('title');
+        $home->description = $request->input('description');
+        $home->area = $request->input('area');
+        $home->price = $request->input('price');
+        $home->rooms = $request->input('rooms');
+        $home->floor = $request->input('floor');
+        $home->has_garden = $request->input('has_garden');
+        $home->registered = $request->input('registered');
+        $home->is_flat = $request->input('is_flat');
+        $home->is_rental = $request->input('is_rental');
+        $home->is_fixed = $request->input('is_fixed');
+        $home->region_id = $request->input('region_id');
+
+        $home->save();
+
+        return redirect()->route('homes.index');
     }
 
     /**
@@ -114,6 +150,10 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $home = Home::find($id);
+
+        $home->delete();
+
+        return redirect()->route('homes.index');
     }
 }
