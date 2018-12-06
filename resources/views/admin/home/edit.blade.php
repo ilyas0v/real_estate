@@ -5,9 +5,11 @@
     <div class="main-content" style="background: #ccc">
         <section class="section">
             <h1 class="section-header">Edit | {{$home->title}}</h1>
-            @foreach($errors->all() as $error)
-                <p class="alert alert-danger">{{$error}}</p>
-            @endforeach
+            @if($errors->any())
+                @foreach($errors->all() as $e)
+                    <p class="alert alert-danger">{{$e}}</p>
+                @endforeach
+            @endif
             <form action="{{route('homes.update',$home->id)}}" method="POST">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
@@ -67,7 +69,7 @@
                             <label for="registered">Registered</label>
                             <select class="form-control" name="registered" id="registered">
                                 <option {{$home->registered == 1 ? 'selected' : '' }} value="1">Yes</option>
-                                <option {{$home->registered == 0 ? 'selected' : '' }} value="1">No</option>
+                                <option {{$home->registered == 0 ? 'selected' : '' }} value="0">No</option>
                             </select>
                         </div>
                     </div>
@@ -111,6 +113,12 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        @foreach($home->images as $image)
+                            <img src="{{asset($image->thumb_url)}}" width="100" style="margin:20px;" alt="">
+                        @endforeach
                     </div>
 
                     <div class="col-md-12">

@@ -5,7 +5,12 @@
     <div class="main-content" style="background: #ccc">
         <section class="section">
             <h1 class="section-header">Add new home</h1>
-            <form action="{{route('homes.store')}}" method="POST">
+            @if($errors->any())
+                @foreach($errors->all() as $e)
+                    <p class="alert alert-danger">{{$e}}</p>
+                @endforeach
+            @endif
+            <form action="{{route('homes.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -106,6 +111,13 @@
                                     <option value="{{$region->id}}">{{$region->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="images">Select images</label>
+                            <input type="file" name="images[]" multiple class="form-control">
                         </div>
                     </div>
 

@@ -31,4 +31,5 @@ Route::group(['prefix' => 'admin' , 'middleware'=>'auth'], function(){
         return view('admin.main');
     })->name('admin.main');
     Route::resource('homes' , 'HomeController');
+    Route::resource('regions' , 'RegionController');
 });

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Home;
 use App\Region;
 use Illuminate\Http\Request;
-
+use Image;
+use App\HomeImage;
 class HomeController extends Controller
 {
     /**
@@ -68,6 +69,25 @@ class HomeController extends Controller
         $home->region_id = $request->region_id;
 
         $home->save();
+
+        if($request->hasFile('images')){
+            $images = $request->file('images');
+
+            foreach($images as $image) {
+                $filename = rand(1111, 9999) . time() . '.' . $image->getClientOriginalExtension();
+                $location = 'images/home/'.$filename;
+                $location_thumb = 'images/home_thumbs/'.$filename;
+                Image::make($image)->save($location);
+                Image::make($image)->resize(300,300)->save($location_thumb);
+                $img_obj = new HomeImage();
+                $img_obj->url = $location;
+                $img_obj->thumb_url = $location_thumb;
+                $img_obj->home_id = $home->id;
+                $img_obj->save();
+            }
+        }
+
+
 
         return redirect()->route('homes.index');
     }

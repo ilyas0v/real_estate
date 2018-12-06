@@ -28,6 +28,14 @@
                     <li><a href="{{route('homes.create')}}"><i class="ion ion-ios-circle-outline"></i> Add home</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#" class="has-dropdown"><i class="ion ion-ios-albums-outline"></i><span>Regions</span></a>
+                <ul class="menu-dropdown">
+                    <li><a href="{{route('regions.index')}}"><i class="ion ion-ios-circle-outline"></i> All regions</a></li>
+                    <li><a href="{{route('regions.create')}}"><i class="ion ion-ios-circle-outline"></i> Add region</a></li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>
